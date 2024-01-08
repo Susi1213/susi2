@@ -1,6 +1,0 @@
-Aquí se define una clase ClimaSemana que tiene dos métodos:
-1. El método ingresar_temperaturas_diarias() solicita al usuario que ingrese las
-temperaturas diarias durante una semana y las almacena en una lista dentro de la instancia de
-la clase.
-2. El método calcular_promedio_semanal() utiliza la lista de temperaturas almacenadas
-en la instancia de la clase para calcular el promedio semanal.
