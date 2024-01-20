@@ -1,49 +1,47 @@
-# Clase Base
-class FiguraGeometrica:
-    def __init__(self, nombre, area):
-        self.nombre = nombre
-        self.area = area
+# Definición de la clase base
+class ProductoElectronico:
+    def __init__(self, nombre, precio):
+        self.__nombre = nombre  # Encapsulación
+        self.__precio = precio
 
-    def calcular_area(self):
-        return self.area
+    def obtener_nombre(self):
+        return self.__nombre
 
-# Clase Derivada
-class Cuadrado(FiguraGeometrica):
-    def __init__(self, lado):
-        super().__init__("Cuadrado", lado * lado)
-        self.lado = lado
+    def obtener_precio(self):
+        return self.__precio
 
-    def __str__(self):
-        return f"Cuadrado con lado {self.lado} y área {self.area}"
+    def mostrar_informacion(self):
+        print(f"Producto: {self.__nombre}, Precio: ${self.__precio}")
 
-# Clase Derivada
-class Circulo(FiguraGeometrica):
-    def __init__(self, radio):
-        super().__init__("Circulo", 3.14 * radio * radio)
-        self.radio = radio
 
-    def __str__(self):
-        return f"Circulo con radio {self.radio} y área {self.area}"
+# Clase derivada que hereda de ProductoElectronico
+class Smartphone(ProductoElectronico):
+    def __init__(self, nombre, precio, modelo):
+        # Llamamos al constructor de la clase base usando super()
+        super().__init__(nombre, precio)
+        self.__modelo = modelo  # Encapsulación
 
-# Ejemplo de polimorfismo a través de métodos sobrescritos
-def imprimir_area(figura):
-    print(f"El área de la figura {figura.nombre} es {figura.calcular_area()}")
+    def obtener_modelo(self):
+        return self.__modelo
 
-imprimir_area(Cuadrado(5))
-imprimir_area(Circulo(10))
+    # Sobrescritura de método de la clase base
+    def mostrar_informacion(self):
+        # Llamamos al método de la clase base usando super()
+        super().mostrar_informacion()
+        print(f"Modelo: {self.__modelo}")
 
-# Ejemplo de polimorfismo a través de argumentos múltiples/variables
-def calcular_area_multiple(figuras):
-    for figura in figuras:
-        print(f"El área de la figura {figura.nombre} es {figura.calcular_area()}")
 
-figuras = [Cuadrado(5), Circulo(10)]
-calcular_area_multiple(figuras)
+# Función que demuestra polimorfismo
+def imprimir_info_producto(producto):
+    producto.mostrar_informacion()
 
-# Ejemplo de polimorfismo a través de métodos con argumentos variables
-def imprimir_figuras(figuras):
-    for figura in figuras:
-        print(figura)
 
-figuras = [Cuadrado(5), Circulo(10)]
-imprimir_figuras(figuras)
+# Crear instancias de las clases
+producto_generico = ProductoElectronico("Cargador USB", 15.99)
+smartphone1 = Smartphone("iPhone 13", 999.99, "A2483")
+smartphone2 = Smartphone("Samsung Galaxy S21", 799.99, "G910F")
+
+# Usar polimorfismo al llamar a la función con diferentes tipos de objetos
+imprimir_info_producto(producto_generico)
+imprimir_info_producto(smartphone1)
+imprimir_info_producto(smartphone2)
